@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  discogs_id: 1
+  running_time: 1
+  artist: one
+
+two:
+  title: MyString
+  discogs_id: 1
+  running_time: 1
+  artist: two
