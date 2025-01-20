@@ -2,7 +2,7 @@
 
 <p class="mb-8 text-4xl text-center text-gray-300">Your collection is <span class="font-bold text-white"><%= @records_count %> records</span><br/>
 You've listened to <span class="font-bold text-white"><%= @logs_count %> records</span> this year 
-  <br/>which is <br/><span class="font-bold text-white"><%= @total_time_listened %></span></p>
+  <br/>which is <br/><span class="font-bold text-white"><%= format_time(@total_time_listened) %></span></p>
 
 <div class="grid grid-cols-3 gap-4">
   <div class="p-4 bg-white rounded-md">
