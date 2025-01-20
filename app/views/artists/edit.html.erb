@@ -1,0 +1,13 @@
+<div>
+  <h1 class="mb-12 text-4xl font-bold">Edit artist</h1>
+
+  <%= form_with model: @artist, class: "flex flex-col gap-4" do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "p-2 rounded-md text-black" %>
+
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar, class: "p-2 rounded-md text-black" %>
+
+    <%= form.submit %>
+  <% end %>
+</div>

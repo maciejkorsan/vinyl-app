@@ -7,9 +7,25 @@ class LogsController < ApplicationController
     redirect_to records_path
   end
 
+  def edit
+    @log = Log.find(params[:id])
+  end
+
+  def update
+    @log = Log.find(params[:id])
+    @log.update(log_params)
+    redirect_to history_path
+  end
+
   def destroy
     @log = Log.find(params[:id])
     @log.destroy
     redirect_to history_path
+  end
+
+  private
+
+  def log_params
+    params.require(:log).permit(:date, :record_id)
   end
 end
