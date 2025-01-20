@@ -1,0 +1,7 @@
+<h1><%= @artist.name %></h1>
+<%= image_tag @artist.avatar, class: "w-1/2" %>
+
+
+<%= link_to "Edit", edit_artist_path(@artist), class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
+<%= link_to "Delete", artist_path(@artist), method: :delete, class: "bg-red-500 text-white px-2 py-1 rounded-md" %>
+

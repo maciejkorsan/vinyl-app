@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "artists/index"
   root "dashboard#index"
   get "dashboard/index"
   resource :session
@@ -6,6 +7,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :logs
   resources :records
+  resources :artists
   get "history", to: "history#index"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

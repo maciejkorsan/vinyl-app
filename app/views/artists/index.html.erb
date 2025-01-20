@@ -1,0 +1,9 @@
+<div>
+  <h1 class="text-4xl font-bold">Artists#index</h1>
+  <%= link_to "New Artist", new_artist_path, class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
+  <ul class="flex flex-col gap-4">
+    <% @artists.each do |artist| %>
+      <li><%= link_to artist.name, artist_path(artist) %></li>
+    <% end %>
+  </ul>
+</div>

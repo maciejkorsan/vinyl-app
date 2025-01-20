@@ -1,4 +1,13 @@
 <div>
-  <h1 class="font-bold text-4xl">History#index</h1>
+  <h1 class="text-4xl font-bold">History#index</h1>
   <p>Find me in app/views/history/index.html.erb</p>
+  <ul class="flex flex-col gap-4">  
+    <% @logs.each do |log| %>
+      <li><%= log.record.title %> <%= log.date %>
+        <%= button_to "Delete", log_path(log), method: :delete, class: "bg-red-500 text-white px-2 py-1 rounded-md" %>
+        <%= link_to "Edit", edit_log_path(log), class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
+      </li>
+    <% end %>
+  </ul>
 </div>
+

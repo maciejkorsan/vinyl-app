@@ -13,6 +13,19 @@ class RecordsController < ApplicationController
     @record = Record.new
   end
 
+  def show
+    @record = Record.find(params[:id])
+  end
+
+  def edit
+    @record = Record.find(params[:id])
+  end
+
+  def update
+    @record = Record.find(params[:id])
+    @record.update(record_params)
+    redirect_to records_path
+  end
 
   private
 
