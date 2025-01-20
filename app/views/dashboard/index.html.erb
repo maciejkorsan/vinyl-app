@@ -1,4 +1,26 @@
-<div>
-  <h1 class="font-bold text-4xl">Dashboard#index</h1>
-  <p>Find me in app/views/dashboard/index.html.erb</p>
+<h1 class="text-4xl font-bold sr-only">Dashboard</h1>
+
+<p class="mb-8 text-4xl text-center text-gray-300">Your collection is <span class="font-bold text-white">50 records</span><br/>
+You've listened to <span class="font-bold text-white">100 records</span> this year 
+  <br/>which is <br/><span class="font-bold text-white">5 days 4 hours and 30 minutes</span></p>
+
+<div class="grid grid-cols-3 gap-4">
+  <div class="p-4 bg-white rounded-md">
+    <h2 class="text-2xl font-bold">Collection</h2>
+    <p>Total records: 100</p>
+  </div>
+  <div class="p-4 bg-white rounded-md">
+    <h2>last played</h2>
+    <div class="aspect-square">
+      <img src="https://placehold.co/600x600" alt="Placeholder" class="object-cover w-full h-full">
+    </div>
+    <span>In Raibows - Radiohead</span>
+  </div>
+  <div class="p-4 bg-white rounded-md">
+    <form action="">
+      <input type="text" placeholder="Search">
+      <button type="submit">LOG RECORD</button>
+    </form>
+  </div>
 </div>
+
