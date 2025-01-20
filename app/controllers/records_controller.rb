@@ -27,9 +27,15 @@ class RecordsController < ApplicationController
     redirect_to records_path
   end
 
+  def destroy
+    @record = Record.find(params[:id])
+    @record.destroy
+    redirect_to records_path
+  end
+
   private
 
   def record_params
-    params.require(:record).permit(:title, :artist_id, :cover)
+    params.require(:record).permit(:title, :artist_id, :cover, :running_time)
   end
 end

@@ -2,6 +2,11 @@
 <%= image_tag @artist.avatar, class: "w-1/2" if @artist.avatar.present? %>
 
 
+<h2>Records</h2>
+<% @artist.records.each do |record| %>
+  <%= image_tag record.cover, class: "w-1/2" if record.cover.present? %>
+<% end %>
+
 <%= link_to "Edit", edit_artist_path(@artist), class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
-<%= link_to "Delete", artist_path(@artist), method: :delete, class: "bg-red-500 text-white px-2 py-1 rounded-md" %>
+<%= button_to "Delete artist", artist_path(@artist), method: :delete, class: "bg-red-500 text-white px-2 py-1 rounded-md" %>
 

@@ -8,6 +8,9 @@
     <%= form.label :artist %>
     <%= form.select :artist_id, Artist.all.map { |artist| [artist.name, artist.id] }, { prompt: "Select artist" }, class: "p-2 rounded-md text-black" %>
 
+    <%= form.label :running_time %>
+    <%= form.number_field :running_time, class: "p-2 rounded-md text-black" %>
+
     <div>
       <%= image_tag @record.cover, class: "w-1/2" if @record.cover.present? %>
     </div>
