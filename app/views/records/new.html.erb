@@ -1,0 +1,16 @@
+<div>
+  <h1 class="mb-12 text-4xl font-bold">Add new record</h1>
+
+  <%= form_with model: @record, class: "flex flex-col gap-4" do |form| %>
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "p-2 rounded-md text-black" %>
+
+    <%= form.label :artist %>
+    <%= form.select :artist_id, Artist.all.map { |artist| [artist.name, artist.id] }, { prompt: "Select artist" }, class: "p-2 rounded-md text-black" %>
+
+    <%= form.label :cover %>
+    <%= form.file_field :cover, class: "p-2 rounded-md text-black" %>
+
+    <%= form.submit %>
+  <% end %>
+</div>
