@@ -66,3 +66,5 @@ group :test do
 end
 
 gem "image_processing", "~> 1.13"
+
+gem "dotenv-rails"

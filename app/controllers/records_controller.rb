@@ -1,3 +1,6 @@
+require "net/http"
+require "uri"
+
 class RecordsController < ApplicationController
   def index
     @records = Record.all
@@ -32,6 +35,100 @@ class RecordsController < ApplicationController
     @record.destroy
     redirect_to records_path
   end
+
+  def search
+    uri = URI("https://api.discogs.com/database/search")
+    uri.query = URI.encode_www_form({
+      q: params[:query],
+      type: "release"
+    })
+
+    request = Net::HTTP::Get.new(uri)
+    request["Authorization"] = "Discogs token=#{ENV['DISCOGS_TOKEN']}"
+
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(request)
+    end
+
+    @results = JSON.parse(response.body)["results"]
+  end
+
+  def import
+    uri = URI("https://api.discogs.com/releases/#{params[:id]}")
+
+    request = Net::HTTP::Get.new(uri)
+    request["Authorization"] = "Discogs token=#{ENV['DISCOGS_TOKEN']}"
+
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(request)
+    end
+
+    @discogs_record = JSON.parse(response.body)
+
+    @record = Record.find_by(discogs_id: @discogs_record["id"])
+
+    if @record.nil?
+
+    @artist = Artist.find_by(discogs_id: @discogs_record["artists"][0]["id"])
+    if @artist.nil?
+      uri = URI("https://api.discogs.com/artists/#{@discogs_record["artists"][0]["id"]}")
+      request = Net::HTTP::Get.new(uri)
+      request["Authorization"] = "Discogs token=#{ENV['DISCOGS_TOKEN']}"
+      response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+        http.request(request)
+      end
+      @discogs_artist = JSON.parse(response.body)
+      @artist = Artist.create(name: @discogs_artist["name"], discogs_id: @discogs_artist["id"])
+
+      # Download avatar using Net::HTTP instead of URI.open
+      avatar_uri = URI(@discogs_artist["images"][0]["uri"])
+      avatar_response = Net::HTTP.get_response(avatar_uri)
+      avatar_file = StringIO.new(avatar_response.body)
+
+      @artist.avatar.attach(io: avatar_file, filename: "avatar.jpg")
+      @artist.save
+    end
+
+    @running_time = @discogs_record["tracklist"].map do |track|
+      if track["duration"].present?
+        minutes, seconds = track["duration"].split(":").map(&:to_i)
+        minutes * 60 + seconds
+      else
+        0
+      end
+    end.sum
+
+    Rails.logger.debug "================================================"
+    Rails.logger.debug "================================================"
+    Rails.logger.debug ""
+    Rails.logger.debug ""
+    Rails.logger.debug ""
+    Rails.logger.debug "Discogs Record Data: #{@running_time}"  # This will print to log file
+
+    Rails.logger.debug ""
+    Rails.logger.debug ""
+    Rails.logger.debug "================================================"
+    Rails.logger.debug "================================================"
+    @record = Record.new(
+      title: @discogs_record["title"],
+      discogs_id: @discogs_record["id"],
+      running_time: @running_time,
+      artist_id: @artist.id,
+    )
+
+    cover_uri = URI(@discogs_record["images"][0]["resource_url"])
+    cover_response = Net::HTTP.get_response(cover_uri)
+    cover_file = StringIO.new(cover_response.body)
+    @record.cover.attach(io: cover_file, filename: "cover.jpg")
+    @record.save
+
+
+      # Rails.logger.debug "Discogs Record Data: #{@discogs_record.inspect}"  # This will print to log file
+    end
+
+    redirect_to records_path
+  end
+
 
   private
 

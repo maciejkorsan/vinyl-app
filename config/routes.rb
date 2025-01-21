@@ -2,13 +2,23 @@ Rails.application.routes.draw do
   root "dashboard#index"
   get "dashboard/index"
   get "history", to: "history#index"
+
   resource :session
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :logs
-  resources :records
+  resources :records do
+    collection do
+      get :search
+      post :import
+    end
+  end
   resources :artists
 
+
+  post "records/import/:id", to: "records#import", as: :import_record
+
+  post "records/search", to: "records#search_discogs"
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

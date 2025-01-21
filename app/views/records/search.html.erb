@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Search Discogs Database 2</h2>
+  
+  <%= form_with(url: search_records_path, method: :get, local: true, class: "mb-4") do |f| %>
+    <div class="input-group">
+      <%= f.text_field :query, class: "form-control", placeholder: "Search by artist or album...", required: true %>
+      <%= f.submit "Search", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <% if @results.present? %>
+    <ul class="space-y-4 search-results">
+      <% @results.each do |result| %>
+        <li class="flex gap-6">
+          <%= form_with(url: import_record_path(result["id"]), method: :post, class: "contents") do |f| %>
+            <button type="submit" class="contents">
+              <img class="block w-24 shrink-0" src="<%= result["cover_image"] %>" alt="<%= result["title"] %>">
+              <div>
+                <span class="block text-lg font-bold"><%= result["title"] %></span>
+                <span class="block text-sm text-gray-500"><%= result["year"] %></span>
+                <ul class="flex gap-2">
+                  <% result["format"].each do |format| %>
+                    <li class="block text-sm text-gray-500"><%= format %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </button>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
