@@ -1,22 +1,23 @@
 <h1 class="text-4xl font-bold sr-only">Dashboard</h1>
 
+<div class="my-24">
 <p class="mb-8 text-4xl text-center text-gray-300">Your collection is <span class="font-bold text-white"><%= @records_count %> records</span><br/>
 You've listened to <span class="font-bold text-white"><%= @logs_count %> records</span> this year 
   <br/>which is <br/><span class="font-bold text-white"><%= format_time(@total_time_listened) %></span></p>
-
+</div>
 <div class="grid grid-cols-3 gap-4">
-  <div class="p-4 bg-white rounded-md">
+  <div class="p-4 bg-gray-800 rounded-md">
     <h2 class="text-2xl font-bold">Collection</h2>
     <p>Total records: <%= @records_count %></p>
   </div>
-  <div class="p-4 bg-white rounded-md">
+  <div class="p-4 bg-gray-800 rounded-md">
     <h2>last played</h2>
     <div class="bg-black aspect-square">
       <%= image_tag @last_played.record.cover, class: "w-full h-full object-cover" if @last_played.record.cover.present? %>
     </div>
     <span><%= @last_played.record.title %> - <%= @last_played.record.artist.name %></span>
   </div>
-  <div class="p-4 bg-white rounded-md">
+  <div class="p-4 bg-gray-800 rounded-md">
     <form action="">
       <input type="text" placeholder="Search">
       <button type="submit">LOG RECORD</button>
