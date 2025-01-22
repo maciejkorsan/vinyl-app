@@ -1,17 +1,26 @@
 <div>
-  <h1 class="text-4xl font-bold">Record#index</h1>
-  <p>Find me in app/views/records/index.html.erb</p>
+  <h1 class="my-8 text-4xl font-bold text-white">My Collection</h1>
 
-  <%= link_to "New Record", new_record_path, class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
+  
 
-  <ul>
-    <% @records.each do |record| %>
-      <li>
-        <%= link_to record.title, record_path(record) %>
-        <%= image_tag record.cover, class: "w-1/2" if record.cover.present? %>
-        <%= button_to "Log", logs_path, params: { record_id: record.id }, method: :post, class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
-      </li>
-    <% end %>
+  <ul class="grid grid-cols-2 gap-8 md:grid-cols-4">
+    <li>
+      <div class="w-full bg-black aspect-square">
+        <%= link_to  new_record_path, :class => "bg-blue-500 text-white px-2 py-1 rounded-md size-full flex items-center justify-center" do %>
+          <span class="text-xl text-center"><span class="text-3xl">+</span><br/> New Record</span>
+        <% end %>
+      </div>
+    </li>
+      <% @records.each do |record| %>
+        <li class="relative">
+          <%= link_to  record_path(record) do %>
+            <div class="w-full bg-black aspect-square">
+              <%= image_tag record.cover, class: "size-full object-contain" if record.cover.present? %>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
   </ul>
 </div>
 
+          <%# <%= button_to "Log", logs_path, params: { record_id: record.id }, method: :post, class: "bg-blue-500 text-white px-2 py-1 rounded-md absolute bottom-2 right-2" %> %>
