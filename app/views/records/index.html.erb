@@ -3,9 +3,9 @@
 
   
 
-  <ul class="grid grid-cols-2 gap-8 md:grid-cols-4">
+  <ul class="grid grid-cols-1 gap-8 md:grid-cols-2">
     <li>
-      <div class="w-full bg-black aspect-square">
+      <div class="w-full bg-black">
         <%= link_to  new_record_path, :class => "bg-blue-500 text-white px-2 py-1 rounded-md size-full flex items-center justify-center" do %>
           <span class="text-xl text-center"><span class="text-3xl">+</span><br/> New Record</span>
         <% end %>
@@ -13,14 +13,26 @@
     </li>
       <% @records.each do |record| %>
         <li class="relative">
-          <%= link_to  record_path(record) do %>
-            <div class="w-full bg-black aspect-square">
+          <%= link_to  record_path(record), class: "flex  h-full items-start gap-4 p-3 rounded-md border-gray-600 border" do %>
+            <div class="overflow-hidden bg-black rounded-md size-24">
               <%= image_tag record.cover, class: "size-full object-contain" if record.cover.present? %>
             </div>
+            <div>
+            <p class="w-full overflow-hidden font-medium text-white text-ellipsis"><%= record.title %></p>
+            <span class="text-xs text-gray-300"><%= record.artist.name %></span><br/>
+            <span class="text-sm text-gray-400">Played <span class="text-gray-300"> <%= record.logs.count %> times</span></span><br/>
+            <% if record.logs.last.present? %>
+              <span class="text-sm text-gray-400">Last played <span class="text-gray-300"><%= record.logs.last.date.strftime("%m/%d/%Y") %></span></span>
+            <% else %>
+              <span class="text-sm text-gray-400">Never played yet</span>
+            <% end %>
+          </div>
+          <% end %>
+          <%= button_to  logs_path, params: { record_id: record.id }, method: :post, class: "bg-transparent text-black  rounded-md absolute top-4 right-4" do %>
+            <img src="/assets/play.svg" class="size-6">
           <% end %>
         </li>
       <% end %>
   </ul>
 </div>
 
-          <%# <%= button_to "Log", logs_path, params: { record_id: record.id }, method: :post, class: "bg-blue-500 text-white px-2 py-1 rounded-md absolute bottom-2 right-2" %> %>
