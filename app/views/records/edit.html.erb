@@ -1,6 +1,6 @@
 <div>
   <h1 class="mb-12 text-4xl font-bold">Edit record</h1>
-
+<%= turbo_frame_tag "record_#{@record.id}" do %>
   <%= form_with model: @record, class: "flex flex-col gap-4" do |form| %>
     <%= form.label :title %>
     <%= form.text_field :title, class: "p-2 rounded-md text-black" %>
@@ -20,4 +20,5 @@
 
     <%= form.submit %>
   <% end %>
+<% end %>
 </div>

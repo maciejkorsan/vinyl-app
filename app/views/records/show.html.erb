@@ -1,4 +1,7 @@
+<%= turbo_frame_tag "record_#{@record.id}" do %>
 <h1><%= @record.title %></h1>
+
+<%= link_to "Back", records_path, class: "bg-gray-200 text-black px-2 py-1 rounded-md" %>
 
 <%= image_tag @record.cover, class: "w-1/2" if @record.cover.present? %>
 
@@ -6,4 +9,4 @@
 <%= link_to "Edit", edit_record_path(@record), class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
 
 <%= button_to "Delete record", record_path(@record), method: :delete, class: "bg-red-500 text-white px-2 py-1 rounded-md" %>
-
+<% end %>

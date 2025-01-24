@@ -13,6 +13,7 @@
     </li>
       <% @records.each do |record| %>
         <li class="relative">
+          <%= turbo_frame_tag "record_#{record.id}" do %>
           <%= link_to  record_path(record), class: "flex  h-full items-start gap-4 p-3 rounded-md border-gray-600 border" do %>
             <div class="overflow-hidden bg-black rounded-md size-24">
               <%= image_tag record.cover, class: "size-full object-contain" if record.cover.present? %>
@@ -28,8 +29,9 @@
             <% end %>
           </div>
           <% end %>
-          <%= button_to  logs_path, params: { record_id: record.id }, method: :post, class: "bg-transparent text-black  rounded-md absolute top-4 right-4" do %>
+          <%= button_to  logs_path, params: { record_id: record.id }, method: :post, class: "bg-transparent opacity-75 hover:opacity-100  text-black  rounded-md absolute top-4 right-4" do %>
             <img src="/assets/play.svg" class="size-6">
+          <% end %>
           <% end %>
         </li>
       <% end %>
