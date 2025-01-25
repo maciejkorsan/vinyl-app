@@ -2,7 +2,7 @@
 service: vinyl_app
 
 # Name of the container image.
-image: your-user/vinyl_app
+image: maciejkorsan/vinyl_app
 
 # Deploy to these servers.
 servers:
