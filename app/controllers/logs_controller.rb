@@ -20,7 +20,8 @@ class LogsController < ApplicationController
   def destroy
     @log = Log.find(params[:id])
     @log.destroy
-    redirect_to history_path
+
+    render turbo_stream: turbo_stream.remove(@log)
   end
 
   private

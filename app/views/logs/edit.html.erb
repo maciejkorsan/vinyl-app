@@ -1,9 +1,9 @@
 <h1>Edit log</h1>
 <%= image_tag @log.record.cover, class: "w-1/2" if @log.record.cover.present? %>
-
-<%= form_with model: @log, class: "flex flex-col gap-4" do |form| %>
-  <%= form.label :date %>
-  <%= form.date_field :date, class: "p-2 rounded-md text-black" %>
-
-  <%= form.submit %>
+<%= turbo_frame_tag "log_#{@log.id}" do %>
+  <%= form_with model: @log, class: "flex flex-col gap-4" do |form| %>
+    <%= form.label :date %>
+    <%= form.date_field :date, class: "p-2 rounded-md text-black" %>
+    <%= form.submit %>
+  <% end %>
 <% end %>
