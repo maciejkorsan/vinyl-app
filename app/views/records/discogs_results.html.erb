@@ -2,7 +2,7 @@
   <% if @results.present? %>
     <ul class="space-y-4 search-results">
       <% @results.each do |result| %>
-        <%= render partial: "records/result", locals: { result: result } %>
+        <%= render partial: "records/discogs_result", locals: { result: result } %>
       <% end %>
     </ul>
   <% else %>

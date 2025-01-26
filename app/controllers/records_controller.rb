@@ -47,9 +47,13 @@ class RecordsController < ApplicationController
   end
 
   def search
+    @results = Record.find_by(title: params[:query])
   end
 
-  def results
+  def discogs_search
+  end
+
+  def discogs_results
     uri = URI("https://api.discogs.com/database/search")
     uri.query = URI.encode_www_form({
       q: params[:query],
@@ -66,7 +70,7 @@ class RecordsController < ApplicationController
     @results = JSON.parse(response.body)["results"]
   end
 
-  def import
+  def discogs_import
     uri = URI("https://api.discogs.com/releases/#{params[:id]}")
 
     request = Net::HTTP::Get.new(uri)

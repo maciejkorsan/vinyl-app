@@ -11,8 +11,10 @@ Rails.application.routes.draw do
   resources :records do
     collection do
       get :search
+      get :discogs_search
+      get :discogs_results
       get :results
-      post "import/:id", to: "records#import", as: :import
+      post "import/:id", to: "records#discogs_import", as: :import
     end
   end
 
