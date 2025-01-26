@@ -13,6 +13,7 @@
   </div>
   <div class="p-4 bg-gray-800 rounded-md">
     <h2>last played</h2>
+    <%= turbo_stream_from "logs" %>
     <% if @last_played.present? %>
       <div class="bg-black aspect-square">
         <%= image_tag @last_played.record.cover, class: "w-full h-full object-cover" if @last_played.record.cover.present? %>
@@ -21,9 +22,6 @@
     <% end %>
   </div>
   <div class="p-4 bg-gray-800 rounded-md">
-    <form action="">
-      <input type="text" placeholder="Search">
-      <button type="submit">LOG RECORD</button>
-    </form>
+    <%= render "log_box" %>
   </div>
 </div>

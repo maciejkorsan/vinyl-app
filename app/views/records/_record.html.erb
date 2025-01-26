@@ -15,7 +15,7 @@
         <% end %>
       </div>
     <% end %>
-    <%= button_to  logs_path, params: { record_id: record.id }, method: :post, class: "bg-transparent opacity-75 hover:opacity-100  text-black  rounded-md absolute top-4 right-4" do %>
+    <%= button_to  logs_path, params: { record_id: record.id, source: "records_list" }, method: :post, class: "bg-transparent opacity-75 hover:opacity-100  text-black  rounded-md absolute top-4 right-4" do %>
       <%= image_tag  "play.svg", class:"size-6" %>
     <% end %>
   </div>

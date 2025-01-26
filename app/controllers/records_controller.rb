@@ -47,7 +47,11 @@ class RecordsController < ApplicationController
   end
 
   def search
-    @results = Record.find_by(title: params[:query])
+    return if params[:query].blank?
+
+    @records = Record.joins(:artist)
+                  .where("LOWER(records.title) LIKE :query OR LOWER(artists.name) LIKE :query",
+                    query: "%#{params[:query].downcase}%")
   end
 
   def discogs_search

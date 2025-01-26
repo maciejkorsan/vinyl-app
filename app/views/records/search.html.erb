@@ -1,0 +1,19 @@
+<%= turbo_frame_tag :records_results do %>
+  <% if @records.present? %>
+    <div class="grid grid-cols-3 gap-4">
+      <% @records.each do |record| %>
+      <div>
+        <%= button_to  logs_path, params: { record_id: record.id }, method: :post do %>
+          <div class="p-4 bg-gray-800 rounded-md">
+            <div class="bg-black aspect-square">
+              <%= image_tag record.cover, class: "w-full h-full object-cover" if record.cover.present? %>
+            </div>
+            <span><%= record.title %> - <%= record.artist.name %></span>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No records found</p>
+  <% end %>
+<% end %>
