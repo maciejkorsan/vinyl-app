@@ -1,3 +1,4 @@
 <%= turbo_stream.prepend "records" do %>
     <%= render partial: "records/record", locals: {record: @record} %>
 <% end %>
+<%= turbo_stream.update "modal" "" %>
