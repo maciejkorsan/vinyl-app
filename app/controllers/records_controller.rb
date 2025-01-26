@@ -10,12 +10,12 @@ class RecordsController < ApplicationController
     @record = Record.new(record_params)
 
     if @record.save
-      redirect_to records_path,
-        notice: "Record was successfully created.",
-        headers: { "Turbo-Frame" => "_top" }
+      respond_to do |format|
+        format.html { redirect_to records_path }
+        format.turbo_stream
+      end
     else
-      render :new, status: :unprocessable_entity,
-        headers: { "Turbo-Frame" => "modal" }
+      render :new
     end
   end
 
@@ -47,6 +47,9 @@ class RecordsController < ApplicationController
   end
 
   def search
+  end
+
+  def results
     uri = URI("https://api.discogs.com/database/search")
     uri.query = URI.encode_www_form({
       q: params[:query],

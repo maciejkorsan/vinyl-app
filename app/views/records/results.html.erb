@@ -1,0 +1,11 @@
+<%= turbo_frame_tag :discogs_results do %>
+  <% if @results.present? %>
+    <ul class="space-y-4 search-results">
+      <% @results.each do |result| %>
+        <%= render partial: "records/result", locals: { result: result } %>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-white">No results found</p>
+  <% end %>
+<% end %>

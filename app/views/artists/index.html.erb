@@ -6,7 +6,13 @@
   <% @artists.each do |artist| %>
     <li>
       <div class="overflow-hidden rounded-full aspect-square">
-        <%= image_tag artist.avatar.variant(format: :avif, resize_to_fill: [150, 150]), class: "object-cover size-full"  %>
+        <% if artist.avatar.attached? %>
+          <%= image_tag artist.avatar.variant(format: :avif, resize_to_fill: [150, 150]), class: "object-cover size-full" %>
+        <% else %>
+          <div class="flex items-center justify-center w-full h-full text-4xl font-bold text-white bg-gray-500">
+            <%= artist.name.first.upcase if artist.name.present? %>
+          </div>
+        <% end %>
       </div>
       <%= link_to artist.name, artist_path(artist) %>
       <%= artist.records.count%>

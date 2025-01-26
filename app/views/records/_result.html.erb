@@ -1,0 +1,15 @@
+         
+<li class="flex gap-6">
+  <%= button_to import_records_path(result["id"]) do %>
+    <img class="block w-24 shrink-0" src="<%= result["cover_image"] %>" alt="<%= result["title"] %>">
+    <div>
+      <span class="block text-lg font-bold"><%= result["title"] %></span>
+      <span class="block text-sm text-gray-500"><%= result["year"] %></span>
+      <ul class="flex gap-2">
+        <% result["format"].each do |format| %>
+          <li class="block text-sm text-gray-500"><%= format %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</li>
