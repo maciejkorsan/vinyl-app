@@ -3,13 +3,20 @@ require "uri"
 
 class RecordsController < ApplicationController
   def index
-    @records = Record.all
+    @records = Record.all.order(created_at: :desc)
   end
 
   def create
     @record = Record.new(record_params)
-    @record.save
-    redirect_to records_path
+
+    if @record.save
+      redirect_to records_path,
+        notice: "Record was successfully created.",
+        headers: { "Turbo-Frame" => "_top" }
+    else
+      render :new, status: :unprocessable_entity,
+        headers: { "Turbo-Frame" => "modal" }
+    end
   end
 
   def new
@@ -33,7 +40,10 @@ class RecordsController < ApplicationController
   def destroy
     @record = Record.find(params[:id])
     @record.destroy
-    redirect_to records_path
+    respond_to do |format|
+      format.html { redirect_to records_path }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@record) }
+    end
   end
 
   def search
@@ -80,12 +90,14 @@ class RecordsController < ApplicationController
       @discogs_artist = JSON.parse(response.body)
       @artist = Artist.create(name: @discogs_artist["name"], discogs_id: @discogs_artist["id"])
 
-      # Download avatar using Net::HTTP instead of URI.open
-      avatar_uri = URI(@discogs_artist["images"][0]["uri"])
-      avatar_response = Net::HTTP.get_response(avatar_uri)
-      avatar_file = StringIO.new(avatar_response.body)
+      if @discogs_artist["images"].present? && @discogs_artist["images"][0].present?
+        avatar_uri = URI(@discogs_artist["images"][0]["uri"])
+        avatar_response = Net::HTTP.get_response(avatar_uri)
+        avatar_file = StringIO.new(avatar_response.body)
 
-      @artist.avatar.attach(io: avatar_file, filename: "avatar.jpg")
+        @artist.avatar.attach(io: avatar_file, filename: "avatar.jpg")
+      end
+
       @artist.save
     end
 
@@ -98,17 +110,6 @@ class RecordsController < ApplicationController
       end
     end.sum
 
-    Rails.logger.debug "================================================"
-    Rails.logger.debug "================================================"
-    Rails.logger.debug ""
-    Rails.logger.debug ""
-    Rails.logger.debug ""
-    Rails.logger.debug "Discogs Record Data: #{@running_time}"  # This will print to log file
-
-    Rails.logger.debug ""
-    Rails.logger.debug ""
-    Rails.logger.debug "================================================"
-    Rails.logger.debug "================================================"
     @record = Record.new(
       title: @discogs_record["title"],
       discogs_id: @discogs_record["id"],
@@ -122,11 +123,11 @@ class RecordsController < ApplicationController
     @record.cover.attach(io: cover_file, filename: "cover.jpg")
     @record.save
 
-
-      # Rails.logger.debug "Discogs Record Data: #{@discogs_record.inspect}"  # This will print to log file
+    respond_to do |format|
+      format.html { redirect_to records_path }
+      format.turbo_stream
     end
-
-    redirect_to records_path
+    end
   end
 
 

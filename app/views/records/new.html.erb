@@ -1,9 +1,21 @@
 <div>
   <h1 class="mb-12 text-4xl font-bold">Add new record</h1>
+<%= turbo_frame_tag :modal do %>
+<dialog class="fixed inset-0 z-10 p-6 rounded-lg backdrop:backdrop-blur-md backdrop:bg-gray-800" open>
+  <%= form_with model: @record, class: "flex flex-col gap-4", data: { turbo_frame: "_top" } do |form| %>
+    <% if @record.errors.any? %>
+      <div class="relative px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded">
+        <h2 class="font-bold"><%= pluralize(@record.errors.count, "error") %> prohibited this record from being saved:</h2>
+        <ul class="list-disc list-inside">
+          <% @record.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <%= form_with model: @record, class: "flex flex-col gap-4" do |form| %>
-    <%= form.label :title %>
-    <%= form.text_field :title, class: "p-2 rounded-md text-black" %>
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "p-2 rounded-md text-black" %>
 
     <%= form.label :artist %>
     <%= form.select :artist_id, Artist.all.map { |artist| [artist.name, artist.id] }, { prompt: "Select artist" }, class: "p-2 rounded-md text-black" %>
@@ -14,6 +26,8 @@
     <%= form.label :cover %>
     <%= form.file_field :cover, class: "p-2 rounded-md text-black" %>
 
-    <%= form.submit %>
+    <%= form.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
   <% end %>
+</dialog>
+<% end %>
 </div>

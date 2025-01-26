@@ -1,36 +1,38 @@
-<div class="container" data-controller="discogs-search">
+<div class="container" ">
   <h2 class="mb-4 text-2xl font-bold">Search Discogs Database</h2>
-  
-  <%= form_with(url: search_records_path, method: :get, local: true, class: "mb-4") do |f| %>
-    <div class="input-group">
-      <%= f.text_field :query, class: "form-control text-black p-2", placeholder: "Search by artist or album...", data: {discogs_search_target: "input"}, required: true %>
-      <%= f.submit "Search", class: "bg-black text-white p-2.5" %>
-    </div>
-  <% end %>
-  <button data-action="discogs-search#scan" class="px-4 py-2 text-white bg-blue-500 rounded-md">Scan</button>
-
-  <video id="video" width="320" height="240" autoplay data-discogs-search-target="video" playsinline> </video>
-
-  <% if @results.present? %>
-    <ul class="space-y-4 search-results">
-      <% @results.each do |result| %>
-        <li class="flex gap-6">
-          <%= form_with(url: import_record_path(result["id"]), method: :post, class: "contents") do |f| %>
-            <button type="submit" class="contents">
-              <img class="block w-24 shrink-0" src="<%= result["cover_image"] %>" alt="<%= result["title"] %>">
-              <div>
-                <span class="block text-lg font-bold"><%= result["title"] %></span>
-                <span class="block text-sm text-gray-500"><%= result["year"] %></span>
-                <ul class="flex gap-2">
-                  <% result["format"].each do |format| %>
-                    <li class="block text-sm text-gray-500"><%= format %></li>
+  <%= turbo_frame_tag :modal do %>
+    <div id="innermodal" role="dialog" class="fixed inset-0 z-10 p-6 rounded-lg backdrop:backdrop-blur-md backdrop:bg-gray-800 max-h-[90dvh] overflow-y-scroll">
+      <button data-action="click->modal#close" class="absolute text-white top-4 right-4">Close</button>
+      <div data-controller="discogs-search">
+        <%= form_with(url: search_records_path, method: :get, local: true, class: "mb-4") do |f| %>
+          <div class="input-group">
+            <%= f.text_field :query, class: "form-control text-black p-2", placeholder: "Search by artist or album...", data: {discogs_search_target: "input"}, required: true %>
+            <%= f.submit "Search", class: "bg-black text-white p-2.5" %>
+          </div>
+        <% end %>
+        <button data-action="discogs-search#scan" class="px-4 py-2 text-white bg-blue-500 rounded-md">Scan</button>
+        <video id="video" width="320" height="240" autoplay data-discogs-search-target="video" playsinline> </video>
+        <% if @results.present? %>
+          <ul class="space-y-4 search-results">
+            <% @results.each do |result| %>
+              <li class="flex gap-6">
+                  <%= button_to import_record_path(result["id"]) do %>
+                    <img class="block w-24 shrink-0" src="<%= result["cover_image"] %>" alt="<%= result["title"] %>">
+                    <div>
+                      <span class="block text-lg font-bold"><%= result["title"] %></span>
+                      <span class="block text-sm text-gray-500"><%= result["year"] %></span>
+                      <ul class="flex gap-2">
+                        <% result["format"].each do |format| %>
+                          <li class="block text-sm text-gray-500"><%= format %></li>
+                        <% end %>
+                      </ul>
+                    </div>
                   <% end %>
-                </ul>
-              </div>
-            </button>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>

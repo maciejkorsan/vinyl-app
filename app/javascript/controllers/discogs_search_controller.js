@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 import { BrowserMultiFormatReader } from "@zxing/browser"
 
 
-// Connects to data-controller="discogs-search"
 export default class extends Controller {
   static targets = ["video", "input"]
 
