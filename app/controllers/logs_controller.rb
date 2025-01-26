@@ -4,6 +4,7 @@ class LogsController < ApplicationController
     @log.record_id = params[:record_id]
     @log.date = Date.today
     @log.save
+
     redirect_to records_path
   end
 
@@ -14,7 +15,10 @@ class LogsController < ApplicationController
   def update
     @log = Log.find(params[:id])
     @log.update(log_params)
-    redirect_to history_path
+    respond_to do |format|
+      format.html { redirect_to history_path }
+      format.turbo_stream
+    end
   end
 
   def destroy

@@ -1,0 +1,11 @@
+ <%= turbo_frame_tag "log_#{log.id}" do %>
+  <li class="flex items-center justify-between p-2 rounded-md group min-h-12 hover:bg-gray-800" >
+    <div class="flex items-center gap-4">
+      <span class="p-2 font-mono text-sm text-white bg-black rounded"><%= log.date.strftime("%m/%d/%Y") %></span>
+      <%= log.record.title %> </div>
+    <span class="hidden gap-4 group-hover:flex">
+      <%= link_to "Edit", edit_log_path(log), class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
+      <%= button_to "Delete", log_path(log), method: :delete, format: :turbo_stream, data: {turbo_confirm: "Are you sure?"},  class: "bg-red-500 text-white px-2 py-1 rounded-md" %>
+    </span>
+  </li>
+<% end %>
