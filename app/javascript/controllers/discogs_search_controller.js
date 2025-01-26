@@ -9,6 +9,8 @@ export default class extends Controller {
     console.log("discogs-search controller connected")
   }
 
+  
+
   scan() {
     const codeReader = new BrowserMultiFormatReader()
     console.log(codeReader)
@@ -20,5 +22,10 @@ export default class extends Controller {
     })
 
     console.log(codeReader)
+  }
+
+  close() {
+    console.log("closing")
+    codeReader.reset()
   }
 }
