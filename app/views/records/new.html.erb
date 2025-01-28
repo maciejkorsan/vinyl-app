@@ -1,7 +1,7 @@
 <div>
   <h1 class="mb-12 text-4xl font-bold">Add new record</h1>
   <%= turbo_frame_tag :modal do %>
-    <dialog data-controller="modal" data-modal-target="modal" class="fixed inset-0 z-10 p-6 rounded-lg backdrop:backdrop-blur-md backdrop:bg-gray-800" open>
+    <dialog data-controller="modal" data-modal-target="modal" data-action="click->modal#clickOutside"  class="fixed inset-0 z-10 p-6 rounded-lg backdrop:backdrop-blur-md backdrop:bg-gray-800/20">
       <button data-action="click->modal#close" class="absolute top-4 right-4">Close</button>
       <%= form_with model: @record, class: "flex flex-col gap-4"  do |form| %>
         <% if @record.errors.any? %>
@@ -15,7 +15,7 @@
           </div>
         <% end %>
         <%= form.label :title %>
-        <%= form.text_field :title, class: "p-2 rounded-md text-black" %>
+        <%= form.text_field :title, class: "p-2 rounded-md text-black", autofocus: true %>
         <%= form.label :artist %>
         <%= form.select :artist_id, Artist.all.map { |artist| [artist.name, artist.id] }, { prompt: "Select artist" }, class: "p-2 rounded-md text-black" %>
         <%= form.label :running_time %>

@@ -5,6 +5,7 @@ export default class extends Controller {
   
   connect() {
     document.addEventListener("keydown", this.handleKeydown.bind(this))
+    this.modalTarget.showModal()
   }
 
   disconnect() {
@@ -13,6 +14,12 @@ export default class extends Controller {
 
   handleKeydown(event) {
     if (event.key === "Escape") {
+      this.close()
+    }
+  }
+
+  clickOutside(event) {
+    if (event.target === this.modalTarget) {
       this.close()
     }
   }

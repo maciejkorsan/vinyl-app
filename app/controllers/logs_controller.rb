@@ -5,11 +5,17 @@ class LogsController < ApplicationController
     @log.date = Date.today
     @log.save
 
-    redirect_to records_path
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def edit
     @log = Log.find(params[:id])
+  end
+
+  def index
+    @logs = Log.all.order(date: :desc, created_at: :desc)
   end
 
   def update

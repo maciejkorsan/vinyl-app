@@ -1,7 +1,7 @@
 <div class="container" ">
   <h2 class="mb-4 text-2xl font-bold">Search Discogs Database</h2>
   <%= turbo_frame_tag :modal do %>
-    <dialog data-controller="modal" data-modal-target="modal"  open id="innermodal" class="fixed text-black max-w-4xl w-full inset-0 z-10 p-6 rounded-lg backdrop:backdrop-blur-md backdrop:bg-gray-800 max-h-[90dvh] overflow-hidden">
+    <dialog data-controller="modal" data-modal-target="modal" data-action="click->modal#clickOutside"  id="innermodal" class="fixed text-black max-w-4xl w-full inset-0 z-10 p-6 rounded-lg backdrop:backdrop-blur-md backdrop:bg-gray-800/20 max-h-[90dvh] overflow-hidden">
       <button  data-action="click->modal#close"  class="absolute top-4 right-4">Close</button>
       <div data-controller="discogs-search">
         <div>
