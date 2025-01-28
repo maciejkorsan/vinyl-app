@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root "dashboard#index"
   get "dashboard/index"
-  get "history", to: "history#index"
 
   resource :session
   resources :passwords, param: :token
