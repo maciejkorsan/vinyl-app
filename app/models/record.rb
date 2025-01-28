@@ -9,11 +9,5 @@ class Record < ApplicationRecord
                         partial: "records/record",
                         locals: { record: self }
   end
-
-
-  after_update_commit -> { broadcast_refresh_later_to("logs") }
-  after_create_commit  -> { broadcast_refresh_later_to("logs") }
-  after_destroy_commit -> { broadcast_refresh_later_to("logs") }
-
   validates :title, presence: true
 end

@@ -1,9 +1,6 @@
-<div class="max-w-3xl mx-auto"><%= turbo_stream_from "logs" %>
-
+<div class="max-w-3xl mx-auto">
   <h1 class="px-2 my-12 text-4xl font-bold">History</h1>
-  
-  <ul class="flex flex-col gap-4">  
+  <ul class="flex flex-col gap-4">
     <%= render @logs, partial: "logs/log" %>
   </ul>
 </div>
-

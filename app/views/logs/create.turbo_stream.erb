@@ -1,1 +1,3 @@
-<%= turbo_stream.refresh request_id: nil %>
+<%= turbo_stream.update @record do %>
+ <%= render partial: "records/record", locals: {record: @record} %>
+<% end %>

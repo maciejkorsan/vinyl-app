@@ -5,8 +5,11 @@ class LogsController < ApplicationController
     @log.date = Date.today
     @log.save
 
+    @record = Record.find(params[:record_id])
+
     respond_to do |format|
       format.turbo_stream
+      format.html { redirect_to logs_path }
     end
   end
 
@@ -22,7 +25,7 @@ class LogsController < ApplicationController
     @log = Log.find(params[:id])
     @log.update(log_params)
     respond_to do |format|
-      format.html { redirect_to history_path }
+      format.html { redirect_to logs_path }
       format.turbo_stream
     end
   end

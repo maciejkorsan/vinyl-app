@@ -2,4 +2,3 @@
     <%= render partial: "records/record", locals: {record: @record} %>
 <% end %>
 <%= turbo_stream.update "modal" "" %>
-<%= turbo_stream.refresh request_id: nil %>
