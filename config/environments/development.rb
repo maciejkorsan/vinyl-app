@@ -73,3 +73,7 @@ Rails.application.configure do
     config.hosts << "8a55-77-46-49-182.ngrok-free.app"
     config.hosts << "8a55-77-46-49-182.ngrok-free.app"
 end
+
+
+Rails.application.routes.default_url_options = { host: "localhost:3000",
+                                                 protocol: "http" }

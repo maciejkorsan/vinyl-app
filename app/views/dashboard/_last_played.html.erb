@@ -1,0 +1,9 @@
+<div id="last_played">
+  <h2>last played</h2>
+  <% if @last_played.present? %>
+    <div class="bg-black aspect-square">
+      <%= image_tag @last_played.record.cover, class: "w-full h-full object-cover" if @last_played.record.cover.present? %>
+    </div>
+    <span><%= @last_played.record.title %> - <%= @last_played.record.artist.name %></span>
+  <% end %>
+</div>

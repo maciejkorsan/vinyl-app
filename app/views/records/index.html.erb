@@ -1,9 +1,6 @@
-<%= turbo_stream_from "logs" %>
-
-
+<%= turbo_stream_from "records" %>
 <div>
   <h1 class="my-8 text-4xl font-bold text-white">My Collection</h1>
-
   <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
     <div class="w-full bg-black">
       <%= link_to discogs_search_records_path, data: { turbo_frame: "modal"},  :class => "bg-blue-500 text-white px-2 py-1 rounded-md  flex items-center justify-center" do %>

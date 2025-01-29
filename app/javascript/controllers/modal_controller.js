@@ -1,11 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["modal", "close"]
   
   connect() {
     document.addEventListener("keydown", this.handleKeydown.bind(this))
-    this.modalTarget.showModal()
+    this.element.showModal()
   }
 
   disconnect() {
@@ -19,12 +18,12 @@ export default class extends Controller {
   }
 
   clickOutside(event) {
-    if (event.target === this.modalTarget) {
+    if (event.target === this.element) {
       this.close()
     }
   }
 
   close() {
-    this.modalTarget.close()
+    this.element.close()
   }
 }

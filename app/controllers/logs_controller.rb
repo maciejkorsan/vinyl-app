@@ -24,17 +24,13 @@ class LogsController < ApplicationController
   def update
     @log = Log.find(params[:id])
     @log.update(log_params)
-    respond_to do |format|
-      format.html { redirect_to logs_path }
-      format.turbo_stream
-    end
+
+    redirect_to logs_path
   end
 
   def destroy
     @log = Log.find(params[:id])
     @log.destroy
-
-    render turbo_stream: turbo_stream.remove(@log)
   end
 
   private

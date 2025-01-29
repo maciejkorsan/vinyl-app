@@ -5,7 +5,7 @@
       <%= log.record.title %> </div>
     <span class="hidden gap-4 group-hover:flex">
       <%= link_to "Edit", edit_log_path(log), class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
-      <%= button_to "Delete", log_path(log), method: :delete, format: :turbo_stream, data: {turbo_confirm: "Are you sure?"},  class: "bg-red-500 text-white px-2 py-1 rounded-md" %>
+      <%= button_to "Delete", log_path(log), method: :delete, data: {turbo_confirm: "Are you sure?"},  class: "bg-red-500 text-white px-2 py-1 rounded-md" %>
     </span>
   </li>
 <% end %>

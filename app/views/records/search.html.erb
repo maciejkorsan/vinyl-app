@@ -3,7 +3,7 @@
     <div class="grid grid-cols-3 gap-4">
       <% @records.each do |record| %>
       <div>
-        <%= button_to  logs_path, params: { record_id: record.id }, method: :post do %>
+        <%= button_to  dashboard_log_path, params: { record_id: record.id }, method: :post do %>
           <div class="p-4 bg-gray-800 rounded-md">
             <div class="bg-black aspect-square">
               <%= image_tag record.cover, class: "w-full h-full object-cover" if record.cover.present? %>
@@ -14,6 +14,9 @@
       <% end %>
     </div>
   <% else %>
-    <p>No records found</p>
+    <p>No records found, would you like to add 
+      <%= link_to "a new one", discogs_search_records_path, data: { turbo_frame: "modal" } %>?
+    
+    </p>
   <% end %>
 <% end %>

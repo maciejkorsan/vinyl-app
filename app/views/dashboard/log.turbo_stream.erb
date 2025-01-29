@@ -1,0 +1,12 @@
+<%= turbo_stream.update "last_played" do %>
+  <%= render partial: 'dashboard/last_played' %>
+<% end %>
+<%= turbo_stream.update "log_box" do %>
+  <%= render partial: 'dashboard/log_box' %>
+<% end %>
+<%= turbo_stream.update "total_time_count" do %>
+  <%= format_time(@total_time_listened)%>
+<% end %>
+<%= turbo_stream.update "logs_count" do %>
+  <%= @logs_count %>
+<% end %>

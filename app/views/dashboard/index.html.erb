@@ -1,25 +1,16 @@
 <h1 class="text-4xl font-bold sr-only">Dashboard</h1>
-
 <div class="my-24">
-  <p class="mb-8 text-4xl text-center text-gray-300">Your collection is <span class="font-bold text-white"><%= @records_count %> records</span><br/>
-    You've listened to <span class="font-bold text-white"><%= @logs_count %> records</span> this year 
+  <p class="mb-8 text-4xl text-center text-gray-300">Your collection has
+    <span class="font-bold text-white"><span id="records_count"><%= @records_count %></span> unique records.</span>
     <br/>
-    which is <br/>
-    <span class="font-bold text-white"><%= format_time(@total_time_listened) %></span></p>
+    This year, you’ve played records <span class="font-bold text-white"><span id="logs_count"><%= @logs_count %></span> times</span>, 
+    <br/>
+   spending a total of  <br/>
+    <span class="font-bold text-white"><span id="total_time_count"><%= format_time(@total_time_listened) %></span></span>listening.</p>
 </div>
-<div class="grid grid-cols-3 gap-4">
+<div class="grid grid-cols-2 gap-4">
   <div class="p-4 bg-gray-800 rounded-md">
-    <h2 class="text-2xl font-bold">Collection</h2>
-    <p>Total records: <%= @records_count %></p>
-  </div>
-  <div class="p-4 bg-gray-800 rounded-md">
-    <h2>last played</h2>
-    <% if @last_played.present? %>
-      <div class="bg-black aspect-square">
-        <%= image_tag @last_played.record.cover, class: "w-full h-full object-cover" if @last_played.record.cover.present? %>
-      </div>
-      <span><%= @last_played.record.title %> - <%= @last_played.record.artist.name %></span>
-    <% end %>
+    <%= render "last_played"%>
   </div>
   <div class="p-4 bg-gray-800 rounded-md">
     <%= render "log_box" %>
