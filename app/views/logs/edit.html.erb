@@ -1,12 +1,18 @@
 <h1>Edit log</h1>
 <%= image_tag @log.record.cover, class: "w-1/2" if @log.record.cover.present? %>
 <%= turbo_frame_tag "log_#{@log.id}" do %>
-  <%= form_with model: @log, class: "flex flex-col gap-4" do |form| %>
+  <div class="flex items-center gap-4 p-2 ">
+  <%= link_to logs_path, class: "block text-gray-300" do %>
+    &larr; Back
+  <% end %>
+  <span><%= @log.record.title %></span>
+ 
+  <%= form_with model: @log, class: "flex items-center gap-6" do |form| %>
     <%= form.label :date %>
-    <%= form.date_field :date, class: "p-2 rounded-md text-black" %>
-    <%= form.submit %>
+    <%= form.date_field :date, class: "px-2 py-1.5 rounded-md text-black" %>
+    <button type="submit" class="text-blue-400">
+      Update the log &rarr;
+    </button>
   <% end %>
-  <%= link_to logs_path do %>
-    Back
-  <% end %>
+  </div>
 <% end %>

@@ -1,12 +1,15 @@
-<h1><%= @artist.name %></h1>
-<%= image_tag @artist.avatar, class: "w-1/2" if @artist.avatar.present? %>
+<div class="flex items-end justify-between gap-8 mb-4 h-60">
+  <h1 class="text-5xl"><%= @artist.name %></h1>
+  <%= image_tag @artist.avatar, class: "h-full rounded-2xl" if @artist.avatar.present? %>
+</div>
+<div class="flex justify-end gap-8 mb-24">
 
-
-<h2>Records</h2>
-<% @artist.records.each do |record| %>
-  <%= image_tag record.cover, class: "w-1/2" if record.cover.present? %>
-<% end %>
-
-<%= link_to "Edit", edit_artist_path(@artist), class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
-<%= button_to "Delete artist", artist_path(@artist), method: :delete, class: "bg-red-500 text-white px-2 py-1 rounded-md" %>
-
+<%= link_to "Edit", edit_artist_path(@artist), class: "text-blue-400 px-2 py-1 rounded-md" %>
+<%= button_to "Delete artist", artist_path(@artist), method: :delete, class: "text-red-400 px-2 py-1 rounded-md" %>
+</div>
+<h2 class="my-4 text-2xl font-medium">Records</h2>
+<div class="grid grid-cols-2 gap-4">
+  <% @artist.records.each do |record| %>
+    <%= render record%>
+  <% end %>
+</div>

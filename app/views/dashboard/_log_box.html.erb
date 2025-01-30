@@ -1,9 +1,10 @@
-<div id="log_box">
+<div id="log_box" class="relative">
   <%= form_with(url: search_records_path, method: :get, local: true, class: "mb-4", data: {controller: "form", turbo_frame: "records_results" }) do |f| %>
     <div class="input-group">
       <%= f.text_field :query, class: "form-control text-black p-2 rounded max-w-2xl w-full", placeholder: "Search by artist or album...", data: {action: "input->form#submit"},  autocomplete: "off" %>
     </div>
   <% end %>
+  <div class="absolute w-full p-4 bg-gray-950 top-[calc(100%_+_1rem)]">
   <%= turbo_frame_tag :records_results do %>
     <p class="text-gray-300">Start typing to search for the record</p>
   <% end %>

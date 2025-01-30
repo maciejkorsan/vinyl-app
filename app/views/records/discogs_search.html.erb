@@ -16,7 +16,7 @@
           <video id="video"  height="480" class="hidden w-full" autoplay data-discogs-search-target="video" playsinline> </video>
           <div class="overflow-hidden grow">
             <%= turbo_frame_tag :discogs_results, src: "/records/discogs_results" ,  class:"h-full group overflow-y-auto"  do %>
-              <p>Loading results</p>
+              <p class="p-6">Loading results</p>
             <% end %>
           </div>
         </div>

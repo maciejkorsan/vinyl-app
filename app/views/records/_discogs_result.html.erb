@@ -1,16 +1,25 @@
-<li>
-  <%= button_to import_records_path(result["id"]), class: "flex gap-4 text-left w-full hover:bg-gray-100 rounded-xl overflow-hidden px-2 py-2 mx-4" do %>
+
+<li class="relative">
+<turbo-frame>
+  <%= button_to import_records_path(result["id"]), class: "flex gap-4 text-left w-full hover:bg-gray-900 hover:text-gray-200 rounded-xl overflow-hidden px-2 py-2 mx-4" do %>
     <div class="overflow-hidden bg-black rounded-md size-20">
       <img class="block object-cover size-full" src="<%= result["cover_image"] %>" alt="<%= result["title"] %>">
     </div>
     <div>
       <span class="block text-lg font-bold"><%= result["title"] %></span>
-      <span class="block text-sm text-gray-500"><%= result["year"] %></span>
+      <span class="block text-sm text-gray-400"><%= result["year"] %></span>
       <ul class="flex gap-2">
         <% result["format"].each do |format| %>
-          <li class="block text-sm text-gray-500"><%= format %></li>
+          <li class="block text-sm text-gray-400"><%= format %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+</turbo-frame>
+  <span class="[[busy]~&]:block hidden absolute top-1/2 right-[5rem] transform -translate-x-1/2 -translate-y-1/2">
+    <svg class="w-6 h-6 text-white animate-spin" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke="currentColor" stroke-width="4"></path>
+    </svg>
+  </span>
 </li>

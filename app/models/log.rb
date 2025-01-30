@@ -17,9 +17,11 @@ class Log < ApplicationRecord
   end
 
   def broadcast_record_update
+    record = Record.find_by(id: record_id)
+
     broadcast_replace_to "records",
                          target: "record_#{record_id}",
                          partial: "records/record",
-                         locals: { record: Record.find(record_id) }
+                         locals: { record: record } if record
   end
 end

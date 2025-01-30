@@ -1,21 +1,23 @@
 <header class="flex items-center justify-between my-8">
   <h1 class="text-4xl font-bold">Artists</h1>
-  <%= link_to "New Artist", new_artist_path, class: "bg-blue-500 text-white px-2 py-1 rounded-md" %>
+  <%= link_to "+ New Artist", new_artist_path,  :class => "text-gray-300 hover:text-gray-100 px-2 py-1 rounded-md  flex items-center justify-center" %>
 </header>
-<ul class="grid grid-cols-4 gap-12">
+<ul class="grid grid-cols-4 gap-6">
   <% @artists.each do |artist| %>
     <li>
-      <div class="overflow-hidden rounded-full aspect-square">
-        <% if artist.avatar.attached? %>
-          <%= image_tag artist.avatar.variant(format: :avif, resize_to_fill: [150, 150]), class: "object-cover size-full" %>
-        <% else %>
-          <div class="flex items-center justify-center w-full h-full text-4xl font-bold text-white bg-gray-500">
-            <%= artist.name.first.upcase if artist.name.present? %>
+      <%= link_to artist_path artist do %>
+        <div class="p-1 text-black bg-gray-200 rounded-2xl">
+          <div class="overflow-hidden rounded-xl aspect-[4/5]">
+            <% if artist.avatar.attached? %>
+              <%= image_tag artist.avatar.variant(format: :avif, resize_to_fill: [300, 300]), class: "object-cover size-full" %>
+            <%end%>
           </div>
-        <% end %>
-      </div>
-      <%= link_to artist.name, artist_path(artist) %>
-      <%= artist.records.count%>
+          <div class="p-2">
+            <h3 class="text-xl font-bold"><%= artist.name %></h3>
+            <p><%= artist.records.count %> <%= "record".pluralize(artist.records.count) %></p>
+          </div>
+        </div>
+      <% end %>
     </li>
   <% end %>
 </ul>

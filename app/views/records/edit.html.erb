@@ -1,24 +1,26 @@
 <div>
   <h1 class="mb-12 text-4xl font-bold">Edit record</h1>
-<%= turbo_frame_tag "record_#{@record.id}" do %>
-  <%= form_with model: @record, class: "flex flex-col gap-4" do |form| %>
-    <%= form.label :title %>
-    <%= form.text_field :title, class: "p-2 rounded-md text-black" %>
-
-    <%= form.label :artist %>
-    <%= form.select :artist_id, Artist.all.map { |artist| [artist.name, artist.id] }, { prompt: "Select artist" }, class: "p-2 rounded-md text-black" %>
-
-    <%= form.label :running_time %>
-    <%= form.number_field :running_time, class: "p-2 rounded-md text-black" %>
-
-    <div>
-      <%= image_tag @record.cover, class: "w-1/2" if @record.cover.present? %>
+  <%= turbo_frame_tag "record_#{@record.id}" do %>
+    <div class="p-4">
+      <%= link_to records_path, class: "mb-4 block" do %>
+        &larr; Back
+      <% end %>
+      <%= form_with model: @record, class: "flex flex-col gap-4" do |form| %>
+        <%= form.label :title %>
+        <%= form.text_field :title, class: "p-2 rounded-md text-black" %>
+        <%= form.label :artist %>
+        <%= form.select :artist_id, Artist.all.map { |artist| [artist.name, artist.id] }, { prompt: "Select artist" }, class: "p-2 rounded-md text-black" %>
+        <%= form.label :running_time %>
+        <%= form.number_field :running_time, class: "p-2 rounded-md text-black" %>
+        <div>
+          <%= image_tag @record.cover, class: "w-1/2" if @record.cover.present? %>
+        </div>
+        <%= form.label :cover %>
+        <%= form.file_field :cover, class: "p-2 rounded-md text-black" %>
+        <button type="submit" class="text-blue-400">
+          Update the record
+        </button>
+      <% end %>
     </div>
-
-    <%= form.label :cover %>
-    <%= form.file_field :cover, class: "p-2 rounded-md text-black" %>
-
-    <%= form.submit %>
   <% end %>
-<% end %>
 </div>

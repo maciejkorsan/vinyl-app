@@ -1,13 +1,13 @@
-<%= turbo_frame_tag "record_#{record.id}" do %>
+<%= turbo_frame_tag "record_#{record.id}", class:"h-full" do %>
   <div class="relative">
-    <%= link_to  record_path(record), class: "flex  h-full items-start gap-4 p-3 rounded-md border-gray-600 border" do %>
-      <div class="overflow-hidden bg-black rounded-md size-24">
+    <%= link_to  record_path(record), class: "flex hover:bg-gray-800  h-full items-start gap-4 p-3 rounded-md border-gray-800 border" do %>
+      <div class="overflow-hidden bg-black rounded-md size-24 shrink-0">
         <%= image_tag record.cover, class: "size-full object-contain" if record.cover.present? %>
       </div>
       <div>
-        <p class="w-full overflow-hidden font-medium text-white text-ellipsis"><%= record.title %></p>
+        <p class="w-full pr-16 overflow-hidden font-medium text-white text-ellipsis"><%= record.title %></p>
         <span class="text-xs text-gray-300"><%= record.artist.name %></span><br/>
-        <span class="text-sm text-gray-400">Played <span class="text-gray-300"> <%= record.logs.count %> times</span></span><br/>
+        <span class="text-sm text-gray-400">Played <span class="text-gray-300"> <%= record.logs.count %> <%= "time".pluralize(record.logs.count) %></span></span><br/>
         <% if record.logs.last.present? %>
           <span class="text-sm text-gray-400">Last played <span class="text-gray-300"><%= record.logs.last.date.strftime("%m/%d/%Y") %></span></span>
         <% else %>
