@@ -1,18 +1,45 @@
 <h1 class="text-4xl font-bold sr-only">Dashboard</h1>
-<div class="my-24">
-  <p class="mb-8 text-4xl text-center text-gray-300">Your collection has
-    <span class="font-bold text-white"><span id="records_count"><%= @records_count %></span> unique records.</span>
-    <br/>
-    This year, you’ve played records <span class="font-bold text-white"><span id="logs_count"><%= @logs_count %></span> times</span>, 
-    <br/>
-   spending a total of  <br/>
-    <span class="font-bold text-white"><span id="total_time_count"><%= format_time(@total_time_listened) %></span></span>listening.</p>
-</div>
-<div class="grid grid-cols-2 gap-4">
-  <div class="p-4 bg-gray-800 rounded-md">
-    <%= render "last_played"%>
+<div class="flex items-center justify-between gap-8 my-24">
+  <div>
+    <p class="mb-8 text-2xl text-center text-gray-300 lg:leading-loose lg:text-5xl">Your collection has
+      <span class="font-bold text-white">
+        <span id="records_count"><%= @records_count %></span>
+        unique records.</span>
+      <br/>
+      This year, you've played records 
+      <span class="font-bold text-gray-200">
+        <span id="logs_count"><%= @logs_count %></span>
+        times</span>, 
+      <br/>
+      spending a total of  <br/>
+      <span class="font-bold text-gray-200">
+        <span id="total_time_count"><%= format_time(@total_time_listened) %></span>
+      </span>listening.</p>
   </div>
-  <div class="p-4 bg-gray-800 rounded-md">
-    <%= render "log_box" %>
-  </div>
+  <%= render "last_played"%>
 </div>
+<section class="my-24">
+  <h2 class="mt-8 mb-4 text-2xl font-bold">Log</h2>
+  <%= render "log_box" %>
+</section>
+</div>
+<section>
+  <h2 class="mt-8 mb-4 text-2xl font-bold">Artists</h2>
+  <div class="grid grid-cols-5 gap-4">
+    <% @artists.each do |artist| %>
+      <%= link_to artist_path artist do %>
+        <div class="p-1 text-black bg-gray-200 rounded-2xl">
+          <div class="overflow-hidden rounded-xl aspect-[4/5]">
+            <% if artist.avatar.attached? %>
+              <%= image_tag artist.avatar.variant(format: :avif, resize_to_fill: [300, 300]), class: "object-cover size-full" %>
+            <%end%>
+          </div>
+          <div class="p-2">
+            <h3 class="text-xl font-bold"><%= artist.name %></h3>
+            <p><%= artist.records.count %> records</p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</section>

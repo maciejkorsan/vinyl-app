@@ -1,7 +1,8 @@
-         
-<li class="flex gap-6">
-  <%= button_to import_records_path(result["id"]) do %>
-    <img class="block w-24 shrink-0" src="<%= result["cover_image"] %>" alt="<%= result["title"] %>">
+<li>
+  <%= button_to import_records_path(result["id"]), class: "flex gap-4 text-left w-full hover:bg-gray-100 rounded-xl overflow-hidden px-2 py-2 mx-4" do %>
+    <div class="overflow-hidden bg-black rounded-md size-20">
+      <img class="block object-cover size-full" src="<%= result["cover_image"] %>" alt="<%= result["title"] %>">
+    </div>
     <div>
       <span class="block text-lg font-bold"><%= result["title"] %></span>
       <span class="block text-sm text-gray-500"><%= result["year"] %></span>

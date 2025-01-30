@@ -10,6 +10,7 @@ export default class extends Controller {
 
   scan() {
     const codeReader = new BrowserMultiFormatReader();
+    this.videoTarget.classList.remove("hidden");
     codeReader.decodeFromVideoDevice(
       undefined,
       this.videoTarget,
@@ -17,6 +18,7 @@ export default class extends Controller {
         if (result) {
           this.inputTarget.value = result.getText();
           this.formTarget.requestSubmit();
+          this.videoTarget.classList.add("hidden");
           codeReader.reset();
         }
       }

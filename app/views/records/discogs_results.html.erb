@@ -1,6 +1,6 @@
 <%= turbo_frame_tag :discogs_results do %>
   <% if @results.present? %>
-    <ul class="space-y-4 search-results">
+    <ul class="space-y-2 search-results">
       <% @results.each do |result| %>
         <%= render partial: "records/discogs_result", locals: { result: result } %>
       <% end %>

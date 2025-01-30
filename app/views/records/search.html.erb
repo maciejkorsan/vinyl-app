@@ -1,22 +1,19 @@
 <%= turbo_frame_tag :records_results do %>
   <% if @records.present? %>
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-6 gap-8 mt-10">
       <% @records.each do |record| %>
-      <div>
-        <%= button_to  dashboard_log_path, params: { record_id: record.id }, method: :post do %>
-          <div class="p-4 bg-gray-800 rounded-md">
-            <div class="bg-black aspect-square">
-              <%= image_tag record.cover, class: "w-full h-full object-cover" if record.cover.present? %>
-            </div>
-            <span><%= record.title %> - <%= record.artist.name %></span>
+        <%= button_to  dashboard_log_path, params: { record_id: record.id }, method: :post, class: "w-full block text-left text-sm" do %>
+      
+          <div class="w-full mb-2 overflow-hidden bg-black aspect-square rounded-xl">
+            <%= image_tag record.cover, class: "w-full h-full object-cover" if record.cover.present? %>
           </div>
+          <p><%= record.title %></p>
+          <p class="text-gray-400"><%= record.artist.name %></p>
         <% end %>
       <% end %>
-    </div>
-  <% else %>
-    <p>No records found, would you like to add 
-      <%= link_to "a new one", discogs_search_records_path, data: { turbo_frame: "modal" } %>?
-    
-    </p>
+    <% else %>
+      <p>No records found, would you like to  
+        <%= link_to "add a new one", discogs_search_records_path, data: { turbo_frame: "modal" }, class: "text-orange-500" %>?
+      </p>
+    <% end %>
   <% end %>
-<% end %>

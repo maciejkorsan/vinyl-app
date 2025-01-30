@@ -51,7 +51,7 @@ class RecordsController < ApplicationController
 
     @records = Record.joins(:artist)
                   .where("LOWER(records.title) LIKE :query OR LOWER(artists.name) LIKE :query",
-                    query: "%#{params[:query].downcase}%")
+                    query: "%#{params[:query].downcase}%").limit(6)
   end
 
   def discogs_search

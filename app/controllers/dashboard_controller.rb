@@ -5,6 +5,8 @@ class DashboardController < ApplicationController
     @logs_count = Log.all.count
     @last_played = Log.order(date: :desc, created_at: :desc).first
     @total_time_listened = Log.joins(:record).sum(:running_time)
+
+    @artists = Artist.joins(:records).group(:name).order("count(records.id) desc").limit(5)
   end
 
   def log
