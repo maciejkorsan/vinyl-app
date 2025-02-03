@@ -1,24 +1,9 @@
-# README
+# GrooveTracker 🎵  
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+GrooveTracker is a lightweight, real-time music tracker built with **Hotwire** and **Ruby on Rails**. It leverages **Turbo Drive, Turbo Streams, Turbo Frames**, and **Stimulus** to deliver a seamless, reactive experience—without the need for heavy JavaScript frameworks.    
 
-Things you may want to cover:
+## 🎬 Built for Arkency's Webinar  
+GrooveTracker was created specifically for **Arkency's webinar "From React to Hotwire"**, showcasing how moving away from React can simplify frontend development.  
+The webinar walks through Turbo Drive, Streams, Frames, and compares them to common React patterns.  
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+🔗 **[Watch the webinar](https://www.youtube.com/watch?v=31gNKSrWnVI)**  
