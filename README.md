@@ -7,3 +7,4 @@ GrooveTracker was created specifically for **Arkency's webinar "From React to Ho
 The webinar walks through Turbo Drive, Streams, Frames, and compares them to common React patterns.  
 
 🔗 **[Watch the webinar](https://www.youtube.com/watch?v=31gNKSrWnVI)**  
+🔗 **[Read more about Hotwire on our blog](https://blog.arkency.com/tags/hotwire/)**  
